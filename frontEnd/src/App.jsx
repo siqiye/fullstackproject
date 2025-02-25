@@ -11,13 +11,8 @@ const App = () => {
   const [showAll, setShowAll] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  // useEffect(() => {
-  //   noteService.getAll().then((initialNotes) => {
-  //     setNotes(initialNotes);
-  //   });
-  // }, []);
   useEffect(() => {
-    axios.get("http://localhost:3001/api/notes").then((res) => {
+    axios.get(`${process.env.REACT_APP_API_URL}/api/notes`).then((res) => {
       setNotes(res.data);
     });
   }, []);

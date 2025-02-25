@@ -27,9 +27,17 @@ const requestLogger = (request, response, next) => {
   next()
 }
 
-const cors = require('cors')
+const cors = require('cors');
 
-app.use(cors())
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
+
+app.use(cors({
+  origin: FRONTEND_URL,
+  credentials: true, // 允许携带 Cookies（如果你的前端有身份验证）
+}));
+
+console.log(`✅ CORS allowing frontend at: ${FRONTEND_URL}`);
+
 
 app.use(express.json())
 app.use(requestLogger)
@@ -93,7 +101,9 @@ app.delete('/api/notes/:id', (request, response) => {
 
 app.use(unknownEndpoint)
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 3001;
+
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
-})
+  console.log(`✅ Server running on port ${PORT}`);
+  console.log(`🔗 API available at http://localhost:${PORT}/api/notes`);
+});
