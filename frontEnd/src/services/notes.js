@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = process.env.REACT_APP_API_URL || "http://localhost:3001/api/notes";
+const baseUrl = import.meta.env.VITE_API_URL || "https://fullstackproject-back.onrender.com/api/notes";
 
 const getAll = () => {
   const request = axios.get(baseUrl)
