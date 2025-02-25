@@ -31,10 +31,7 @@ const cors = require('cors');
 
 const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
 
-app.use(cors({
-  origin: FRONTEND_URL,
-  credentials: true, // 允许携带 Cookies（如果你的前端有身份验证）
-}));
+app.use(cors()); 
 
 console.log(`✅ CORS allowing frontend at: ${FRONTEND_URL}`);
 
