@@ -12,9 +12,19 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/api/notes`).then((res) => {
-      setNotes(res.data);
-    });
+    noteService
+      .getAll()
+      .then((initialNotes) => {
+        console.log("Fetched notes:", initialNotes);
+        setNotes(initialNotes);
+      })
+      .catch((error) => {
+        console.error("Error fetching notes:", error);
+        setErrorMessage("Failed to load notes.");
+        setTimeout(() => {
+          setErrorMessage(null);
+        }, 5000);
+      });
   }, []);
 
   const addNote = (event) => {
